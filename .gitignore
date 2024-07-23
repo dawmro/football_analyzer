@@ -1,5 +1,5 @@
-# runs
-runs/
+# Videos
+*.avi
 
 # Models
 *.pt
