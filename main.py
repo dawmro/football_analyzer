@@ -10,8 +10,12 @@ def main():
 
     tracks = tracker.get_object_tracks(video_frames, read_from_stubs=True, stub_path='stubs/track_stubs.pkl')
 
+    # vvv draw output vvv
+    # draw objects tracks
+    output_video_frames = tracker.draw_annotations(video_frames, tracks)
+
     # save video
-    save_video(video_frames, "output_videos/output_video.avi")
+    save_video(output_video_frames, "output_videos/output_video.avi")
 
 if __name__ == "__main__":
     main()
