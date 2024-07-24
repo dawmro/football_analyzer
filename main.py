@@ -2,6 +2,7 @@ from utils import read_video, save_video
 from trackers import Tracker
 import cv2
 from team_assigner import TeamAssigner
+from player_ball_assigner import PlayerBallAssigner
 
 
 def main():
@@ -25,6 +26,17 @@ def main():
             team = team_assigner.get_player_team(video_frames[frame_num], track['bbox'], player_id)
             tracks['players'][frame_num][player_id]['team'] = team
             tracks['players'][frame_num][player_id]['team_color'] = team_assigner.team_colors[team]
+
+    # assign ball aquisition
+    player_assigner = PlayerBallAssigner()
+    for frame_num, player_track in enumerate(tracks['players']):
+        ball_bbox = tracks['ball'][frame_num][1]['bbox']
+        assigned_player = player_assigner.assign_ball_to_player(player_track, ball_bbox)
+
+        if assigned_player != -1:
+            # add new key:valuet to dict called has_ball:True
+            tracks['players'][frame_num][assigned_player]['has_ball'] = True
+
 
 
     # vvv draw output vvv
