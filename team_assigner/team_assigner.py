@@ -53,7 +53,7 @@ class TeamAssigner:
             player_colors.append(player_color)
 
         # divide colors into white and green
-        kmeans = KMeans(n_clusters=2, init="k-means++", n_init=1)
+        kmeans = KMeans(n_clusters=2, init="k-means++", n_init=10)
         kmeans.fit(player_colors)
 
         self.kmeans = kmeans
